@@ -8,7 +8,6 @@
 import Foundation
 import SwiftData
 
-@MainActor
 class PlayerStore {
     /// Fetch all saved players from the library
     static func fetchSavedPlayers(context: ModelContext) -> [Player] {

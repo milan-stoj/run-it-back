@@ -79,6 +79,7 @@ struct EditPlayerView: View {
                             showNameField: true,
                             showTotalRating: true
                         )
+                        
                         // Save Button
                         Button {
                             savePlayer()
