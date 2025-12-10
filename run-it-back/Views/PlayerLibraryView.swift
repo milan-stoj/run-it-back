@@ -155,11 +155,11 @@ struct PlayerLibraryCard: View {
                 Spacer()
                 
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text("Total Rating")
+                    Text("Grade")
                         .font(.caption)
                         .foregroundColor(.gray)
                     
-                    Text("\(player.totalRating)")
+                    Text(player.gradeRating)
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.cyan)
@@ -175,7 +175,7 @@ struct PlayerLibraryCard: View {
                 GridItem(.flexible()),
                 GridItem(.flexible())
             ], spacing: 12) {
-                StatBadge(label: "Scoring", value: player.scoring)
+                StatBadge(label: "Scoring", value: player.offense)
                 StatBadge(label: "Defense", value: player.defense)
                 StatBadge(label: "Playmaking", value: player.playmaking)
                 StatBadge(label: "Athleticism", value: player.athleticism)

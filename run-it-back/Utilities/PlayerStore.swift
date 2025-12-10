@@ -41,7 +41,7 @@ class PlayerStore {
     static func createGameCopy(of player: Player) -> Player {
         return Player(
             name: player.name,
-            scoring: player.scoring,
+            offense: player.offense,
             defense: player.defense,
             playmaking: player.playmaking,
             athleticism: player.athleticism,

@@ -24,13 +24,10 @@ struct HomeView: View {
                     VStack(spacing: 0) {
                         // Header with border
                         VStack(spacing: 8) {
-                            Text("🏀 Run It Back")
-                                .font(.system(size: 32, weight: .bold))
-                                .foregroundColor(.white)
-                            
-                            Text("Pick-up Basketball Game Organizer")
-                                .font(.system(size: 16))
-                                .foregroundColor(Color(white: 0.67))
+                            Image("Logo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: .infinity)
                         }
                         .padding(.horizontal, 24)
                         .padding(.top, 40)
@@ -58,6 +55,9 @@ struct HomeView: View {
                                 .cornerRadius(8)
                         }
                         .padding(.horizontal, 24)
+                        
+                        Spacer()
+                            .frame(height: 16)
                         
                         // Player Library button
                         Button {
@@ -110,7 +110,25 @@ struct HomeView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 32)
-                    .padding(.bottom, 48)
+                    .padding(.bottom, 24)
+                    
+                    Spacer()
+                    
+                    // Footer section
+                    VStack(spacing: 4) {
+                        Text("© 2025 NextAllis Tech")
+                            .font(.system(size: 12))
+                            .foregroundColor(Color(white: 0.5))
+                        
+                        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+                           let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+                            Text("Version \(version) (Build \(build))")
+                                .font(.system(size: 10))
+                                .foregroundColor(Color(white: 0.4))
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.bottom, 20)
                 }
             }
             .navigationBarHidden(true)

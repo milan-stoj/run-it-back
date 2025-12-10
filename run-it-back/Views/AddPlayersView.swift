@@ -15,7 +15,7 @@ struct AddPlayersView: View {
     
     @State private var players: [Player] = []
     @State private var playerName: String = ""
-    @State private var scoring: Int = 3
+    @State private var offense: Int = 3
     @State private var defense: Int = 3
     @State private var playmaking: Int = 3
     @State private var athleticism: Int = 3
@@ -66,7 +66,7 @@ struct AddPlayersView: View {
                             
                             PlayerCustomizationView(
                                 name: $playerName,
-                                scoring: $scoring,
+                                offense: $offense,
                                 defense: $defense,
                                 playmaking: $playmaking,
                                 athleticism: $athleticism,
@@ -173,7 +173,7 @@ struct AddPlayersView: View {
         
         let newPlayer = Player(
             name: playerName,
-            scoring: scoring,
+            offense: offense,
             defense: defense,
             playmaking: playmaking,
             athleticism: athleticism,
@@ -186,7 +186,7 @@ struct AddPlayersView: View {
         
         // Reset form
         playerName = ""
-        scoring = 3
+        offense = 3
         defense = 3
         playmaking = 3
         athleticism = 3
@@ -213,7 +213,7 @@ struct PlayerCardView: View {
                     .foregroundColor(.white)
                 
                 HStack(spacing: 12) {
-                    Text("SC:\(player.scoring)")
+                    Text("SC:\(player.offense)")
                     Text("DF:\(player.defense)")
                     Text("PM:\(player.playmaking)")
                     Text("AT:\(player.athleticism)")
@@ -226,8 +226,8 @@ struct PlayerCardView: View {
             
             Spacer()
             
-            Text("\(player.totalRating)")
-                .font(.system(size: 14, weight: .semibold))
+            Text(player.gradeRating)
+                .font(.system(size: 14, weight: .bold))
                 .foregroundColor(.white)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)

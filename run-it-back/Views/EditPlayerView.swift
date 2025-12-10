@@ -21,7 +21,7 @@ struct EditPlayerView: View {
     let mode: EditPlayerMode
     
     @State private var name: String = ""
-    @State private var scoring: Int = 3
+    @State private var offense: Int = 3
     @State private var defense: Int = 3
     @State private var playmaking: Int = 3
     @State private var athleticism: Int = 3
@@ -41,7 +41,7 @@ struct EditPlayerView: View {
     }
     
     var totalRating: Int {
-        scoring + defense + playmaking + athleticism + intangibles + heightBonus
+        offense + defense + playmaking + athleticism + intangibles + heightBonus
     }
     
     init(player: Player?, mode: EditPlayerMode) {
@@ -50,7 +50,7 @@ struct EditPlayerView: View {
         
         if let player = player {
             _name = State(initialValue: player.name)
-            _scoring = State(initialValue: player.scoring)
+            _offense = State(initialValue: player.offense)
             _defense = State(initialValue: player.defense)
             _playmaking = State(initialValue: player.playmaking)
             _athleticism = State(initialValue: player.athleticism)
@@ -69,7 +69,7 @@ struct EditPlayerView: View {
                     VStack(spacing: 24) {
                         PlayerCustomizationView(
                             name: $name,
-                            scoring: $scoring,
+                            offense: $offense,
                             defense: $defense,
                             playmaking: $playmaking,
                             athleticism: $athleticism,
@@ -79,7 +79,6 @@ struct EditPlayerView: View {
                             showNameField: true,
                             showTotalRating: true
                         )
-                        
                         // Save Button
                         Button {
                             savePlayer()
@@ -128,7 +127,7 @@ struct EditPlayerView: View {
         if mode == .add {
             let newPlayer = Player(
                 name: trimmedName,
-                scoring: scoring,
+                offense: offense,
                 defense: defense,
                 playmaking: playmaking,
                 athleticism: athleticism,
@@ -139,7 +138,7 @@ struct EditPlayerView: View {
             PlayerStore.savePlayer(newPlayer, context: modelContext)
         } else if let player = player {
             player.name = trimmedName
-            player.scoring = scoring
+            player.offense = offense
             player.defense = defense
             player.playmaking = playmaking
             player.athleticism = athleticism

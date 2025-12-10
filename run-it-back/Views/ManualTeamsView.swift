@@ -318,7 +318,7 @@ struct TeamSection: View {
                                     .font(.system(size: 16, weight: .medium))
                                     .foregroundColor(.white)
                                 
-                                Text("\(player.heightFormatted) | Total: \(player.totalRating)")
+                                Text("\(player.heightFormatted) | Grade: \(player.gradeRating)")
                                     .font(.system(size: 12))
                                     .foregroundColor(Color(white: 0.53))
                             }
@@ -358,8 +358,8 @@ struct TeamSection: View {
     NavigationStack {
         ManualTeamsView(
             players: [
-                Player(name: "John Doe", scoring: 4, defense: 3, playmaking: 4, athleticism: 5, intangibles: 3, height: 74),
-                Player(name: "Jane Smith", scoring: 3, defense: 5, playmaking: 3, athleticism: 4, intangibles: 4, height: 70)
+                Player(name: "John Doe", offense: 4, defense: 3, playmaking: 4, athleticism: 5, intangibles: 3, height: 74),
+                Player(name: "Jane Smith", offense: 3, defense: 5, playmaking: 3, athleticism: 4, intangibles: 4, height: 70)
             ],
             gameState: GameState(courtName: "Test Court", location: "Test Location")
         )

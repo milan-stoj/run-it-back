@@ -12,7 +12,7 @@ import SwiftData
 class Player {
     @Attribute(.unique) var id: UUID
     var name: String
-    var scoring: Int
+    var offense: Int
     var defense: Int
     var playmaking: Int
     var athleticism: Int
@@ -23,7 +23,7 @@ class Player {
     init(
         id: UUID = UUID(),
         name: String,
-        scoring: Int = 3,
+        offense: Int = 3,
         defense: Int = 3,
         playmaking: Int = 3,
         athleticism: Int = 3,
@@ -33,7 +33,7 @@ class Player {
     ) {
         self.id = id
         self.name = name
-        self.scoring = scoring
+        self.offense = offense
         self.defense = defense
         self.playmaking = playmaking
         self.athleticism = athleticism
@@ -44,7 +44,7 @@ class Player {
     
     // Calculate base rating (sum of all skills)
     var baseRating: Int {
-        scoring + defense + playmaking + athleticism + intangibles
+        offense + defense + playmaking + athleticism + intangibles
     }
     
     // Height bonus: +1 per 3 inches above 6'0" (72 inches)
@@ -55,6 +55,38 @@ class Player {
     // Total rating including height bonus
     var totalRating: Int {
         baseRating + heightBonus
+    }
+    
+    // Convert total rating to letter grade
+    var gradeRating: String {
+        switch totalRating {
+        case 28...Int.max:  // 28+
+            return "A+"
+        case 26...27:
+            return "A"
+        case 24...25:
+            return "A-"
+        case 22...23:
+            return "B+"
+        case 20...21:
+            return "B"
+        case 18...19:
+            return "B-"
+        case 16...17:
+            return "C+"
+        case 14...15:
+            return "C"
+        case 12...13:
+            return "C-"
+        case 10...11:
+            return "D+"
+        case 8...9:
+            return "D"
+        case 6...7:
+            return "D-"
+        default:
+            return "F"
+        }
     }
     
     // Formatted height string (e.g., "6'2\"")

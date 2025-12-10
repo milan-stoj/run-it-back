@@ -145,7 +145,7 @@ struct SelectablePlayerCard: View {
                     Text("•")
                         .foregroundColor(.gray)
                     
-                    Text("Rating: \(player.totalRating)")
+                    Text("Grade: \(player.gradeRating)")
                         .font(.subheadline)
                         .foregroundColor(.cyan)
                 }
@@ -153,8 +153,8 @@ struct SelectablePlayerCard: View {
             
             Spacer()
             
-            // Total rating badge
-            Text("\(player.totalRating)")
+            // Grade badge
+            Text(player.gradeRating)
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundColor(.white)

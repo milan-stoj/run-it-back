@@ -43,6 +43,50 @@ struct TeamsView: View {
         TeamBalancer.getTeamTotal(team: teamB)
     }
     
+    var teamDifference: Int {
+        teamATotal - teamBTotal
+    }
+    
+    var teamAAdvantage: String {
+        if teamDifference > 0 {
+            return "+\(teamDifference)"
+        } else if teamDifference < 0 {
+            return "\(teamDifference)"
+        } else {
+            return "Even"
+        }
+    }
+    
+    var teamBAdvantage: String {
+        if teamDifference < 0 {
+            return "+\(abs(teamDifference))"
+        } else if teamDifference > 0 {
+            return "-\(teamDifference)"
+        } else {
+            return "Even"
+        }
+    }
+    
+    var teamAColor: Color {
+        if teamATotal > teamBTotal {
+            return Color(red: 0.31, green: 0.8, blue: 0.77)
+        } else if teamBTotal > teamATotal {
+            return Color(red: 1.0, green: 0.42, blue: 0.42)
+        } else {
+            return Color.accentColor.opacity(0.7)
+        }
+    }
+    
+    var teamBColor: Color {
+        if teamBTotal > teamATotal {
+            return Color(red: 0.31, green: 0.8, blue: 0.77)
+        } else if teamATotal > teamBTotal {
+            return Color(red: 1.0, green: 0.42, blue: 0.42)
+        } else {
+            return Color.accentColor.opacity(0.7)
+        }
+    }
+
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
@@ -54,17 +98,19 @@ struct TeamsView: View {
                         // Team A
                         TeamColumn(
                             teamName: "Team A",
-                            teamColor: Color(red: 1.0, green: 0.42, blue: 0.42),
+                            teamColor: teamAColor,
                             players: teamA,
-                            total: teamATotal
+                            total: teamATotal,
+                            advantage: teamAAdvantage
                         )
                         
                         // Team B
                         TeamColumn(
                             teamName: "Team B",
-                            teamColor: Color(red: 0.31, green: 0.8, blue: 0.77),
+                            teamColor: teamBColor,
                             players: teamB,
-                            total: teamBTotal
+                            total: teamBTotal,
+                            advantage: teamBAdvantage
                         )
                     }
                     .padding(16)
@@ -117,24 +163,47 @@ struct TeamColumn: View {
     let teamColor: Color
     let players: [Player]
     let total: Int
+    let advantage: String
+    
+    var advantageColor: Color {
+//        if advantage.starts(with: "+") {
+//            return .white
+//        } else if advantage.starts(with: "-") {
+//            return .red
+//        } else {
+//            return .white
+//        }
+        .white.opacity(0.7)
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             // Team Header
-            HStack {
-                Text(teamName)
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.white)
+            VStack(spacing: 4) {
+                HStack {
+                    Text(teamName)
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                    
+//                    Text("\(total)")
+                    Text(advantage)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.white.opacity(0.8))
+                }
                 
-                Spacer()
-                
-                Text("\(total)")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(Color.white.opacity(0.2))
-                    .cornerRadius(4)
+//                HStack {
+//                    Text("Advantage")
+//                        .font(.system(size: 12))
+//                        .foregroundColor(.white.opacity(0.7))
+                    
+//                    Spacer()
+                    
+//                    Text(advantage)
+//                        .font(.system(size: 12, weight: .bold))
+//                        .foregroundColor(advantageColor)
+//                }
             }
             .padding(12)
             .background(teamColor)
@@ -187,8 +256,8 @@ struct PlayerRowView: View {
             
             Spacer()
             
-            Text("\(player.totalRating)")
-                .font(.system(size: 14, weight: .semibold))
+            Text(player.gradeRating)
+                .font(.system(size: 14, weight: .bold))
                 .foregroundColor(.white)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
@@ -223,10 +292,10 @@ struct InfoRow: View {
     NavigationStack {
         TeamsView(
             players: [
-                Player(name: "John Doe", scoring: 4, defense: 3, playmaking: 4, athleticism: 5, intangibles: 3, height: 74),
-                Player(name: "Jane Smith", scoring: 3, defense: 5, playmaking: 3, athleticism: 4, intangibles: 4, height: 70),
-                Player(name: "Bob Johnson", scoring: 5, defense: 2, playmaking: 3, athleticism: 3, intangibles: 5, height: 78),
-                Player(name: "Alice Williams", scoring: 2, defense: 4, playmaking: 5, athleticism: 3, intangibles: 3, height: 68)
+                Player(name: "John Doe", offense: 4, defense: 4, playmaking: 1, athleticism: 5, intangibles: 3, height: 74),
+                Player(name: "Jane Smith", offense: 3, defense: 5, playmaking: 3, athleticism: 4, intangibles: 4, height: 70),
+                Player(name: "Bob Johnson", offense: 5, defense: 2, playmaking: 2, athleticism: 3, intangibles: 5, height: 78),
+                Player(name: "Alice Williams", offense: 2, defense: 4, playmaking: 5, athleticism: 3, intangibles: 3, height: 68)
             ],
             gameState: GameState(courtName: "Central Park", location: "Manhattan, NY"),
             mode: .autoBalance

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PlayerCustomizationView: View {
     @Binding var name: String
-    @Binding var scoring: Int
+    @Binding var offense: Int
     @Binding var defense: Int
     @Binding var playmaking: Int
     @Binding var athleticism: Int
@@ -29,7 +29,38 @@ struct PlayerCustomizationView: View {
     }
     
     var totalRating: Int {
-        scoring + defense + playmaking + athleticism + intangibles + heightBonus
+        offense + defense + playmaking + athleticism + intangibles + heightBonus
+    }
+    
+    var gradeRating: String {
+        switch totalRating {
+        case 28...Int.max:
+            return "A+"
+        case 26...27:
+            return "A"
+        case 24...25:
+            return "A-"
+        case 22...23:
+            return "B+"
+        case 20...21:
+            return "B"
+        case 18...19:
+            return "B-"
+        case 16...17:
+            return "C+"
+        case 14...15:
+            return "C"
+        case 12...13:
+            return "C-"
+        case 10...11:
+            return "D+"
+        case 8...9:
+            return "D"
+        case 6...7:
+            return "D-"
+        default:
+            return "F"
+        }
     }
     
     var body: some View {
@@ -54,11 +85,11 @@ struct PlayerCustomizationView: View {
             // Total Rating Display
             if showTotalRating {
                 VStack(spacing: 8) {
-                    Text("Total Rating")
+                    Text("Overall Grade")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                     
-                    Text("\(totalRating)")
+                    Text(gradeRating)
                         .font(.system(size: 48, weight: .bold))
                         .foregroundColor(.cyan)
                 }
@@ -74,7 +105,7 @@ struct PlayerCustomizationView: View {
                     .font(.headline)
                     .foregroundColor(.white)
                 
-                StatSlider(label: "Scoring", value: $scoring)
+                StatSlider(label: "Offense", value: $offense)
                 StatSlider(label: "Defense", value: $defense)
                 StatSlider(label: "Playmaking", value: $playmaking)
                 StatSlider(label: "Athleticism", value: $athleticism)
@@ -172,7 +203,7 @@ struct StatSlider: View {
         ScrollView {
             PlayerCustomizationView(
                 name: .constant("Test Player"),
-                scoring: .constant(3),
+                offense: .constant(3),
                 defense: .constant(3),
                 playmaking: .constant(3),
                 athleticism: .constant(3),
