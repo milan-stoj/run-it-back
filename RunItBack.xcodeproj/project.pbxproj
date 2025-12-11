@@ -6,14 +6,30 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		F1B3F0F62EEB5C4400AFBECC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1B317072EE8D07A00B11C11 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1B3170E2EE8D07A00B11C11;
+			remoteInfo = "run-it-back";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		F1B3170F2EE8D07A00B11C11 /* run-it-back.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "run-it-back.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1B3170F2EE8D07A00B11C11 /* RunItBack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunItBack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1B3F0F22EEB5C4400AFBECC /* RunItBackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunItBackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F1B317112EE8D07A00B11C11 /* run-it-back */ = {
+		F1B317112EE8D07A00B11C11 /* RunItBack */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "run-it-back";
+			path = RunItBack;
+			sourceTree = "<group>";
+		};
+		F1B3F0F32EEB5C4400AFBECC /* RunItBackTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = RunItBackTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,13 +42,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F1B3F0EF2EEB5C4400AFBECC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		F1B317062EE8D07A00B11C11 = {
 			isa = PBXGroup;
 			children = (
-				F1B317112EE8D07A00B11C11 /* run-it-back */,
+				F1B317112EE8D07A00B11C11 /* RunItBack */,
+				F1B3F0F32EEB5C4400AFBECC /* RunItBackTests */,
 				F1B317102EE8D07A00B11C11 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +64,8 @@
 		F1B317102EE8D07A00B11C11 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F1B3170F2EE8D07A00B11C11 /* run-it-back.app */,
+				F1B3170F2EE8D07A00B11C11 /* RunItBack.app */,
+				F1B3F0F22EEB5C4400AFBECC /* RunItBackTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +73,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F1B3170E2EE8D07A00B11C11 /* run-it-back */ = {
+		F1B3170E2EE8D07A00B11C11 /* RunItBack */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F1B3171A2EE8D07C00B11C11 /* Build configuration list for PBXNativeTarget "run-it-back" */;
+			buildConfigurationList = F1B3171A2EE8D07C00B11C11 /* Build configuration list for PBXNativeTarget "RunItBack" */;
 			buildPhases = (
 				F1B3170B2EE8D07A00B11C11 /* Sources */,
 				F1B3170C2EE8D07A00B11C11 /* Frameworks */,
@@ -61,14 +86,37 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F1B317112EE8D07A00B11C11 /* run-it-back */,
+				F1B317112EE8D07A00B11C11 /* RunItBack */,
 			);
-			name = "run-it-back";
+			name = RunItBack;
 			packageProductDependencies = (
 			);
 			productName = "run-it-back";
-			productReference = F1B3170F2EE8D07A00B11C11 /* run-it-back.app */;
+			productReference = F1B3170F2EE8D07A00B11C11 /* RunItBack.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F1B3F0F12EEB5C4400AFBECC /* RunItBackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1B3F0FA2EEB5C4400AFBECC /* Build configuration list for PBXNativeTarget "RunItBackTests" */;
+			buildPhases = (
+				F1B3F0EE2EEB5C4400AFBECC /* Sources */,
+				F1B3F0EF2EEB5C4400AFBECC /* Frameworks */,
+				F1B3F0F02EEB5C4400AFBECC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1B3F0F72EEB5C4400AFBECC /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F1B3F0F32EEB5C4400AFBECC /* RunItBackTests */,
+			);
+			name = RunItBackTests;
+			packageProductDependencies = (
+			);
+			productName = "run-it-backTests";
+			productReference = F1B3F0F22EEB5C4400AFBECC /* RunItBackTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -83,9 +131,13 @@
 					F1B3170E2EE8D07A00B11C11 = {
 						CreatedOnToolsVersion = 26.1.1;
 					};
+					F1B3F0F12EEB5C4400AFBECC = {
+						CreatedOnToolsVersion = 26.1.1;
+						TestTargetID = F1B3170E2EE8D07A00B11C11;
+					};
 				};
 			};
-			buildConfigurationList = F1B3170A2EE8D07A00B11C11 /* Build configuration list for PBXProject "run-it-back" */;
+			buildConfigurationList = F1B3170A2EE8D07A00B11C11 /* Build configuration list for PBXProject "RunItBack" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,13 +151,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F1B3170E2EE8D07A00B11C11 /* run-it-back */,
+				F1B3170E2EE8D07A00B11C11 /* RunItBack */,
+				F1B3F0F12EEB5C4400AFBECC /* RunItBackTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F1B3170D2EE8D07A00B11C11 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1B3F0F02EEB5C4400AFBECC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F1B3F0EE2EEB5C4400AFBECC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1B3F0F72EEB5C4400AFBECC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1B3170E2EE8D07A00B11C11 /* RunItBack */;
+			targetProxy = F1B3F0F62EEB5C4400AFBECC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		F1B317182EE8D07C00B11C11 /* Debug */ = {
@@ -183,6 +258,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Run It Back";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -240,6 +316,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "Run It Back";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
@@ -318,10 +395,52 @@
 			};
 			name = Release;
 		};
+		F1B3F0F82EEB5C4400AFBECC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HV3FNB8Y85;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nextallistech.run-it-backTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RunItBack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RunItBack";
+			};
+			name = Debug;
+		};
+		F1B3F0F92EEB5C4400AFBECC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HV3FNB8Y85;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nextallistech.run-it-backTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RunItBack.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RunItBack";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F1B3170A2EE8D07A00B11C11 /* Build configuration list for PBXProject "run-it-back" */ = {
+		F1B3170A2EE8D07A00B11C11 /* Build configuration list for PBXProject "RunItBack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F1B317182EE8D07C00B11C11 /* Debug */,
@@ -330,11 +449,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F1B3171A2EE8D07C00B11C11 /* Build configuration list for PBXNativeTarget "run-it-back" */ = {
+		F1B3171A2EE8D07C00B11C11 /* Build configuration list for PBXNativeTarget "RunItBack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F1B3171B2EE8D07C00B11C11 /* Debug */,
 				F1B3171C2EE8D07C00B11C11 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1B3F0FA2EEB5C4400AFBECC /* Build configuration list for PBXNativeTarget "RunItBackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1B3F0F82EEB5C4400AFBECC /* Debug */,
+				F1B3F0F92EEB5C4400AFBECC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

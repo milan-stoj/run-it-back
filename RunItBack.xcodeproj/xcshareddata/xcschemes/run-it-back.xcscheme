@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F1B3170E2EE8D07A00B11C11"
-               BuildableName = "run-it-back.app"
-               BlueprintName = "run-it-back"
-               ReferencedContainer = "container:run-it-back.xcodeproj">
+               BuildableName = "RunItBack.app"
+               BlueprintName = "RunItBack"
+               ReferencedContainer = "container:RunItBack.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,19 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F1B3F0F12EEB5C4400AFBECC"
+               BuildableName = "RunItBackTests.xctest"
+               BlueprintName = "RunItBackTests"
+               ReferencedContainer = "container:RunItBack.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -45,9 +58,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F1B3170E2EE8D07A00B11C11"
-            BuildableName = "run-it-back.app"
-            BlueprintName = "run-it-back"
-            ReferencedContainer = "container:run-it-back.xcodeproj">
+            BuildableName = "RunItBack.app"
+            BlueprintName = "RunItBack"
+            ReferencedContainer = "container:RunItBack.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F1B3170E2EE8D07A00B11C11"
-            BuildableName = "run-it-back.app"
-            BlueprintName = "run-it-back"
-            ReferencedContainer = "container:run-it-back.xcodeproj">
+            BuildableName = "RunItBack.app"
+            BlueprintName = "RunItBack"
+            ReferencedContainer = "container:RunItBack.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
