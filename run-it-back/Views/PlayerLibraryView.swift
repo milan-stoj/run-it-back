@@ -29,7 +29,7 @@ struct PlayerLibraryView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.black.ignoresSafeArea()
+                Color(uiColor: .systemBackground).ignoresSafeArea()
                 
                 if savedPlayers.isEmpty {
                     emptyStateView
@@ -44,7 +44,7 @@ struct PlayerLibraryView: View {
                     Button("Close") {
                         dismiss()
                     }
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -52,7 +52,7 @@ struct PlayerLibraryView: View {
                         showingAddPlayer = true
                     } label: {
                         Image(systemName: "plus.circle.fill")
-                            .foregroundColor(.cyan)
+                            .foregroundStyle(.tint)
                             .font(.title2)
                     }
                 }
@@ -71,16 +71,16 @@ struct PlayerLibraryView: View {
         VStack(spacing: 20) {
             Image(systemName: "person.2.slash")
                 .font(.system(size: 60))
-                .foregroundColor(.gray)
+                .foregroundStyle(.secondary)
             
             Text("No Saved Players")
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
             
             Text("Add players to your library to quickly add them to games")
                 .font(.body)
-                .foregroundColor(.gray)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
             
@@ -89,9 +89,9 @@ struct PlayerLibraryView: View {
             } label: {
                 Label("Add Player", systemImage: "plus")
                     .font(.headline)
-                    .foregroundColor(.black)
+                    .foregroundStyle(.primary)
                     .padding()
-                    .background(Color.cyan)
+                    .background(Color(uiColor: .secondarySystemBackground))
                     .cornerRadius(12)
             }
             .padding(.top, 10)
@@ -145,11 +145,11 @@ struct PlayerLibraryCard: View {
                     Text(player.name)
                         .font(.title3)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.primary)
                     
                     Text(player.heightFormatted)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.secondary)
                 }
                 
                 Spacer()
@@ -157,17 +157,17 @@ struct PlayerLibraryCard: View {
                 VStack(alignment: .trailing, spacing: 4) {
                     Text("Grade")
                         .font(.caption)
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.secondary)
                     
                     Text(player.gradeRating)
                         .font(.title)
                         .fontWeight(.bold)
-                        .foregroundColor(.cyan)
+                        .foregroundStyle(.tint)
                 }
             }
             
             Divider()
-                .background(Color.white.opacity(0.2))
+                .background(Color.secondary.opacity(0.2))
             
             // Stats Grid
             LazyVGrid(columns: [
@@ -175,7 +175,7 @@ struct PlayerLibraryCard: View {
                 GridItem(.flexible()),
                 GridItem(.flexible())
             ], spacing: 12) {
-                StatBadge(label: "Scoring", value: player.offense)
+                StatBadge(label: "Offense", value: player.offense)
                 StatBadge(label: "Defense", value: player.defense)
                 StatBadge(label: "Playmaking", value: player.playmaking)
                 StatBadge(label: "Athleticism", value: player.athleticism)
@@ -187,11 +187,11 @@ struct PlayerLibraryCard: View {
             }
         }
         .padding()
-        .background(Color.white.opacity(0.1))
+        .background(Color(uiColor: .secondarySystemBackground))
         .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
         )
     }
 }
@@ -205,15 +205,15 @@ struct StatBadge: View {
         VStack(spacing: 4) {
             Text(label)
                 .font(.caption2)
-                .foregroundColor(.gray)
+                .foregroundStyle(.secondary)
             
             Text("\(value)")
                 .font(.headline)
-                .foregroundColor(isBonus ? .green : .white)
+                .foregroundStyle(isBonus ? .green : .primary)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 8)
-        .background(Color.white.opacity(0.05))
+        .background(Color(uiColor: .tertiarySystemBackground))
         .cornerRadius(8)
     }
 }

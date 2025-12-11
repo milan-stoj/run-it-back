@@ -41,7 +41,7 @@ struct ManualTeamsView: View {
     
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color(uiColor: .systemBackground).ignoresSafeArea()
             
             VStack(spacing: 0) {
                 ScrollView {
@@ -50,19 +50,19 @@ struct ManualTeamsView: View {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Pick Your Teams")
                                 .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(.white)
+                                .foregroundStyle(.primary)
                             
                             Text("Tap A or B to assign players to teams")
                                 .font(.system(size: 14))
-                                .foregroundColor(Color(white: 0.67))
+                                .foregroundStyle(.secondary)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(16)
-                        .background(Color.black)
+                        .background(Color(uiColor: .systemBackground))
                         .overlay(
                             Rectangle()
                                 .frame(height: 1)
-                                .foregroundColor(Color(white: 0.2)),
+                                .foregroundColor(Color.secondary.opacity(0.2)),
                             alignment: .bottom
                         )
                         
@@ -71,7 +71,7 @@ struct ManualTeamsView: View {
                             VStack(alignment: .leading, spacing: 12) {
                                 Text("Unassigned Players (\(unassigned.count))")
                                     .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(.white)
+                                    .foregroundStyle(.primary)
                                 
                                 ForEach(unassigned) { player in
                                     UnassignedPlayerCard(
@@ -111,7 +111,7 @@ struct ManualTeamsView: View {
                             VStack(spacing: 8) {
                                 Text("Team Difference: \(difference)")
                                     .font(.system(size: 14, weight: .medium))
-                                    .foregroundColor(.white)
+                                    .foregroundStyle(.primary)
                                 
                                 if difference == 0 {
                                     Text("✓ Perfectly Balanced!")
@@ -125,11 +125,11 @@ struct ManualTeamsView: View {
                             }
                             .frame(maxWidth: .infinity)
                             .padding(16)
-                            .background(Color(white: 0.1))
+                            .background(Color(uiColor: .secondarySystemBackground))
                             .cornerRadius(8)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(white: 0.2), lineWidth: 1)
+                                    .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
                             )
                             .padding(.horizontal, 16)
                         }
@@ -144,38 +144,23 @@ struct ManualTeamsView: View {
                     Button(action: handleViewTeams) {
                         Text("View Final Teams")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.black)
+                            .foregroundStyle(.primary)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
-                            .background(Color.white)
+                            .background(Color(uiColor: .secondarySystemBackground))
                             .cornerRadius(6)
                     }
                     .disabled(!unassigned.isEmpty)
                     .opacity(unassigned.isEmpty ? 1.0 : 0.5)
-                    
-                    Button(action: { /* Navigate back */ }) {
-                        Text("Back")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Color(white: 0.1))
-                            .cornerRadius(6)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .stroke(Color(white: 0.2), lineWidth: 1)
-                            )
-                    }
                 }
                 .padding(16)
-                .background(Color.black)
+                .background(Color(uiColor: .systemBackground))
             }
         }
         .navigationTitle("Manual Teams")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(Color.black, for: .navigationBar)
+        .toolbarBackground(Color(uiColor: .systemBackground), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarColorScheme(.dark, for: .navigationBar)
         .navigationDestination(item: $navigationDestination) { destination in
             switch destination {
             case .viewTeams:
@@ -233,11 +218,11 @@ struct UnassignedPlayerCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(player.name)
                     .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 
                 Text("\(player.heightFormatted) | Total: \(player.totalRating)")
                     .font(.system(size: 12))
-                    .foregroundColor(Color(white: 0.53))
+                    .foregroundStyle(.secondary)
             }
             
             Spacer()
@@ -263,11 +248,11 @@ struct UnassignedPlayerCard: View {
             }
         }
         .padding(12)
-        .background(Color(white: 0.1))
+        .background(Color(uiColor: .secondarySystemBackground))
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(white: 0.2), lineWidth: 1)
+                .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
         )
     }
 }
@@ -286,16 +271,16 @@ struct TeamSection: View {
             HStack {
                 Text(teamName)
                     .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 
                 Spacer()
                 
                 Text("\(total)")
                     .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
-                    .background(Color.white.opacity(0.2))
+                    .background(Color(uiColor: .tertiarySystemBackground))
                     .cornerRadius(4)
             }
             .padding(12)
@@ -305,10 +290,10 @@ struct TeamSection: View {
             if players.isEmpty {
                 Text("No players yet")
                     .font(.system(size: 14))
-                    .foregroundColor(Color(white: 0.4))
+                    .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity)
                     .padding(16)
-                    .background(Color(white: 0.1))
+                    .background(Color(uiColor: .secondarySystemBackground))
             } else {
                 VStack(spacing: 0) {
                     ForEach(players) { player in
@@ -316,11 +301,11 @@ struct TeamSection: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(player.name)
                                     .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(.white)
+                                    .foregroundStyle(.primary)
                                 
                                 Text("\(player.heightFormatted) | Grade: \(player.gradeRating)")
                                     .font(.system(size: 12))
-                                    .foregroundColor(Color(white: 0.53))
+                                    .foregroundStyle(.secondary)
                             }
                             
                             Spacer()
@@ -335,11 +320,11 @@ struct TeamSection: View {
                             }
                         }
                         .padding(12)
-                        .background(Color(white: 0.1))
+                        .background(Color(uiColor: .secondarySystemBackground))
                         
                         if player.id != players.last?.id {
                             Divider()
-                                .background(Color(white: 0.2))
+                                .background(Color.secondary.opacity(0.2))
                         }
                     }
                 }
@@ -348,7 +333,7 @@ struct TeamSection: View {
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(white: 0.2), lineWidth: 1)
+                .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
         )
         .padding(.horizontal, 16)
     }

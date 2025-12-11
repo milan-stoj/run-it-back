@@ -63,7 +63,7 @@ struct EditPlayerView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.black.ignoresSafeArea()
+                Color(uiColor: .systemBackground).ignoresSafeArea()
                 
                 ScrollView {
                     VStack(spacing: 24) {
@@ -86,13 +86,14 @@ struct EditPlayerView: View {
                         } label: {
                             Text(mode == .add ? "Add to Library" : "Save Changes")
                                 .font(.headline)
-                                .foregroundColor(.black)
+                                .foregroundStyle(.primary)
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(name.trimmingCharacters(in: .whitespaces).isEmpty ? Color.gray : Color.cyan)
+                                .background(Color(uiColor: .secondarySystemBackground))
                                 .cornerRadius(12)
                         }
                         .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty)
+                        .opacity(name.trimmingCharacters(in: .whitespaces).isEmpty ? 0.5 : 1.0)
                         .padding(.top)
                     }
                     .padding()
@@ -105,7 +106,7 @@ struct EditPlayerView: View {
                     Button("Cancel") {
                         dismiss()
                     }
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 }
             }
             .alert("Error", isPresented: $showingError) {

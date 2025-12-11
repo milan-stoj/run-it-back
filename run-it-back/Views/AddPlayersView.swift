@@ -25,6 +25,7 @@ struct AddPlayersView: View {
     @State private var navigationDestination: NavigationDestination?
     @State private var showAlert = false
     @State private var showingPlayerLibrary = false
+    @State private var isAddSectionExpanded: Bool = true
     
     enum NavigationDestination: Hashable {
         case autoBalance
@@ -37,11 +38,11 @@ struct AddPlayersView: View {
     
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color(uiColor: .systemBackground).ignoresSafeArea()
             
             VStack(spacing: 0) {
                 ScrollView {
-                    VStack(spacing: 24) {
+                    VStack(spacing: 16) {
                         // Import from Library Button
                         Button {
                             showingPlayerLibrary = true
@@ -51,52 +52,64 @@ struct AddPlayersView: View {
                                 Text("Import from Library")
                             }
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.black)
+                            .foregroundStyle(.primary)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
-                            .background(Color.cyan)
+                            .background(Color(uiColor: .secondarySystemBackground))
                             .cornerRadius(8)
                         }
                         
                         // Add Player Section
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("Add Player")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundColor(.white)
-                            
-                            PlayerCustomizationView(
-                                name: $playerName,
-                                offense: $offense,
-                                defense: $defense,
-                                playmaking: $playmaking,
-                                athleticism: $athleticism,
-                                intangibles: $intangibles,
-                                heightFeet: $heightFeet,
-                                heightInches: $heightInches,
-                                showNameField: true,
-                                showTotalRating: false
-                            )
-                            
-                            Button(action: addPlayer) {
-                                Text("Add Player")
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(.black)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 14)
-                                    .background(Color.white)
-                                    .cornerRadius(8)
+                        DisclosureGroup(isExpanded: $isAddSectionExpanded) {
+                            VStack(alignment: .leading, spacing: 16) {
+                                PlayerCustomizationView(
+                                    name: $playerName,
+                                    offense: $offense,
+                                    defense: $defense,
+                                    playmaking: $playmaking,
+                                    athleticism: $athleticism,
+                                    intangibles: $intangibles,
+                                    heightFeet: $heightFeet,
+                                    heightInches: $heightInches,
+                                    showNameField: true,
+                                    showTotalRating: false
+                                )
+
+                                Button(action: addPlayer) {
+                                    Text("Add Player")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .foregroundStyle(.primary)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 14)
+                                        .background(Color(uiColor: .secondarySystemBackground))
+                                        .cornerRadius(8)
+                                }
                             }
+                            .padding(16)
+                        } label: {
+                            HStack {
+                                Text("Add Player")
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundStyle(.primary)
+                                Spacer()
+                                    .foregroundStyle(.secondary)
+                            }
+                            .contentShape(Rectangle())
                         }
-                        .padding(16)
-                        .background(Color(white: 0.1))
-                        .cornerRadius(12)
+                        .padding(12)
+                        .background(Color.clear)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+                        )
+                        .tint(.primary)
                         
                         // Players List
                         if !players.isEmpty {
                             VStack(alignment: .leading, spacing: 12) {
                                 Text("Players (\(players.count))")
                                     .font(.system(size: 18, weight: .semibold))
-                                    .foregroundColor(.white)
+                                    .foregroundStyle(.primary)
                                 
                                 ForEach(players) { player in
                                     PlayerCardView(player: player, onDelete: {
@@ -115,37 +128,36 @@ struct AddPlayersView: View {
                         Button(action: { navigationDestination = .autoBalance }) {
                             Text("Auto Balance Teams")
                                 .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.black)
+                                .foregroundStyle(.primary)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 14)
-                                .background(Color.white)
+                                .background(Color(uiColor: .secondarySystemBackground))
                                 .cornerRadius(6)
                         }
                         
                         Button(action: { navigationDestination = .manualPick }) {
                             Text("Pick Teams Manually")
                                 .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white)
+                                .foregroundStyle(.primary)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 14)
-                                .background(Color(white: 0.1))
+                                .background(Color(uiColor: .secondarySystemBackground))
                                 .cornerRadius(6)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 6)
-                                        .stroke(Color(white: 0.2), lineWidth: 1)
+                                        .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
                                 )
                         }
                     }
                     .padding(16)
-                    .background(Color.black)
+                    .background(Color(uiColor: .systemBackground))
                 }
             }
         }
         .navigationTitle("Add Players")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(Color.black, for: .navigationBar)
+        .toolbarBackground(Color(uiColor: .systemBackground), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarColorScheme(.dark, for: .navigationBar)
         .navigationDestination(item: $navigationDestination) { destination in
             switch destination {
             case .autoBalance:
@@ -210,10 +222,10 @@ struct PlayerCardView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(player.name)
                     .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 
                 HStack(spacing: 12) {
-                    Text("SC:\(player.offense)")
+                    Text("OF:\(player.offense)")
                     Text("DF:\(player.defense)")
                     Text("PM:\(player.playmaking)")
                     Text("AT:\(player.athleticism)")
@@ -221,17 +233,17 @@ struct PlayerCardView: View {
                     Text(player.heightFormatted)
                 }
                 .font(.system(size: 11))
-                .foregroundColor(Color(white: 0.6))
+                .foregroundStyle(.secondary)
             }
             
             Spacer()
             
             Text(player.gradeRating)
                 .font(.system(size: 14, weight: .bold))
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .background(Color(white: 0.2))
+                .background(Color(uiColor: .tertiarySystemBackground))
                 .cornerRadius(4)
             
             Button(action: onDelete) {
@@ -241,11 +253,11 @@ struct PlayerCardView: View {
             }
         }
         .padding(12)
-        .background(Color(white: 0.1))
+        .background(Color(uiColor: .secondarySystemBackground))
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(white: 0.2), lineWidth: 1)
+                .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
         )
     }
 }
@@ -255,3 +267,4 @@ struct PlayerCardView: View {
         AddPlayersView(gameState: GameState(courtName: "Test Court", location: "Test Location"))
     }
 }
+

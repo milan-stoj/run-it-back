@@ -28,7 +28,7 @@ struct PlayerLibrarySelectionView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.black.ignoresSafeArea()
+                Color(uiColor: .systemBackground).ignoresSafeArea()
                 
                 if savedPlayers.isEmpty {
                     emptyStateView
@@ -43,14 +43,14 @@ struct PlayerLibrarySelectionView: View {
                     Button("Cancel") {
                         dismiss()
                     }
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Add (\(selectedPlayerIDs.count))") {
                         addSelectedPlayers()
                     }
-                    .foregroundColor(selectedPlayerIDs.isEmpty ? .gray : .cyan)
+                    .tint(.accentColor)
                     .disabled(selectedPlayerIDs.isEmpty)
                 }
             }
@@ -62,16 +62,16 @@ struct PlayerLibrarySelectionView: View {
         VStack(spacing: 20) {
             Image(systemName: "person.2.slash")
                 .font(.system(size: 60))
-                .foregroundColor(.gray)
+                .foregroundStyle(.secondary)
             
             Text("No Saved Players")
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
             
             Text("Add players to your library first to import them")
                 .font(.body)
-                .foregroundColor(.gray)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
         }
@@ -121,12 +121,12 @@ struct SelectablePlayerCard: View {
             // Selection indicator
             ZStack {
                 Circle()
-                    .strokeBorder(isSelected ? Color.cyan : Color.white.opacity(0.3), lineWidth: 2)
+                    .strokeBorder(isSelected ? Color.accentColor : Color.secondary.opacity(0.3), lineWidth: 2)
                     .frame(width: 28, height: 28)
                 
                 if isSelected {
                     Circle()
-                        .fill(Color.cyan)
+                        .fill(Color.accentColor)
                         .frame(width: 16, height: 16)
                 }
             }
@@ -135,19 +135,19 @@ struct SelectablePlayerCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(player.name)
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 
                 HStack(spacing: 12) {
                     Text(player.heightFormatted)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.secondary)
                     
                     Text("•")
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.secondary)
                     
                     Text("Grade: \(player.gradeRating)")
                         .font(.subheadline)
-                        .foregroundColor(.cyan)
+                        .foregroundStyle(.tint)
                 }
             }
             
@@ -157,17 +157,17 @@ struct SelectablePlayerCard: View {
             Text(player.gradeRating)
                 .font(.title3)
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
                 .frame(width: 50, height: 50)
-                .background(Color.cyan.opacity(0.2))
+                .background(Color.accentColor.opacity(0.15))
                 .cornerRadius(8)
         }
         .padding()
-        .background(isSelected ? Color.cyan.opacity(0.1) : Color.white.opacity(0.05))
+        .background(isSelected ? Color.accentColor.opacity(0.1) : Color(uiColor: .secondarySystemBackground))
         .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(isSelected ? Color.cyan : Color.white.opacity(0.2), lineWidth: isSelected ? 2 : 1)
+                .stroke(isSelected ? Color.accentColor : Color.secondary.opacity(0.2), lineWidth: isSelected ? 2 : 1)
         )
     }
 }
@@ -176,3 +176,4 @@ struct SelectablePlayerCard: View {
     PlayerLibrarySelectionView(players: .constant([]))
         .modelContainer(for: Player.self, inMemory: true)
 }
+

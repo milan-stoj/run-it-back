@@ -89,7 +89,7 @@ struct TeamsView: View {
 
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color(.systemBackground).ignoresSafeArea()
             
             ScrollView {
                 VStack(spacing: 16) {
@@ -119,7 +119,7 @@ struct TeamsView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Game Details")
                             .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundStyle(.primary)
                         
                         VStack(spacing: 8) {
                             InfoRow(label: "Court", value: gameState.courtName)
@@ -129,11 +129,11 @@ struct TeamsView: View {
                         }
                     }
                     .padding(16)
-                    .background(Color(white: 0.1))
+                    .background(.ultraThinMaterial)
                     .cornerRadius(12)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color(white: 0.2), lineWidth: 1)
+                            .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
                     )
                     .padding(.horizontal, 16)
                     
@@ -144,9 +144,8 @@ struct TeamsView: View {
         }
         .navigationTitle("Teams")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(Color.black, for: .navigationBar)
+        .toolbarBackground(Color(.systemBackground), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarColorScheme(.dark, for: .navigationBar)
     }
     
     private func formatDate(_ date: Date) -> String {
@@ -166,14 +165,7 @@ struct TeamColumn: View {
     let advantage: String
     
     var advantageColor: Color {
-//        if advantage.starts(with: "+") {
-//            return .white
-//        } else if advantage.starts(with: "-") {
-//            return .red
-//        } else {
-//            return .white
-//        }
-        .white.opacity(0.7)
+        .primary.opacity(0.7)
     }
     
     var body: some View {
@@ -183,27 +175,14 @@ struct TeamColumn: View {
                 HStack {
                     Text(teamName)
                         .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                     
                     Spacer()
                     
-//                    Text("\(total)")
                     Text(advantage)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.white.opacity(0.8))
                 }
-                
-//                HStack {
-//                    Text("Advantage")
-//                        .font(.system(size: 12))
-//                        .foregroundColor(.white.opacity(0.7))
-                    
-//                    Spacer()
-                    
-//                    Text(advantage)
-//                        .font(.system(size: 12, weight: .bold))
-//                        .foregroundColor(advantageColor)
-//                }
             }
             .padding(12)
             .background(teamColor)
@@ -212,10 +191,10 @@ struct TeamColumn: View {
             if players.isEmpty {
                 Text("No players")
                     .font(.system(size: 14))
-                    .foregroundColor(Color(white: 0.4))
+                    .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity)
                     .padding(16)
-                    .background(Color(white: 0.1))
+                    .background(Color(UIColor.secondarySystemBackground))
             } else {
                 VStack(spacing: 0) {
                     ForEach(players) { player in
@@ -223,17 +202,17 @@ struct TeamColumn: View {
                         
                         if player.id != players.last?.id {
                             Divider()
-                                .background(Color(white: 0.2))
+                                .background(Color.secondary.opacity(0.2))
                         }
                     }
                 }
-                .background(Color(white: 0.1))
+                .background(Color(UIColor.secondarySystemBackground))
             }
         }
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(white: 0.2), lineWidth: 1)
+                .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
         )
     }
 }
@@ -247,21 +226,21 @@ struct PlayerRowView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(player.name)
                     .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 
                 Text(player.heightFormatted)
                     .font(.system(size: 12))
-                    .foregroundColor(Color(white: 0.53))
+                    .foregroundStyle(.secondary)
             }
             
             Spacer()
             
             Text(player.gradeRating)
                 .font(.system(size: 14, weight: .bold))
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .background(Color(white: 0.2))
+                .background(Color(UIColor.secondarySystemBackground))
                 .cornerRadius(4)
         }
         .padding(12)
@@ -277,13 +256,13 @@ struct InfoRow: View {
         HStack {
             Text(label)
                 .font(.system(size: 14))
-                .foregroundColor(Color(white: 0.67))
+                .foregroundStyle(.secondary)
             
             Spacer()
             
             Text(value)
                 .font(.system(size: 14, weight: .medium))
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
         }
     }
 }

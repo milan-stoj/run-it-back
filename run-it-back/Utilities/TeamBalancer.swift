@@ -58,7 +58,7 @@ class TeamBalancer {
         var teamBTotal: Int = 0;
         
         // Enumerate the sorted players: gives both index and player
-        for (index, player) in sortedPlayers.enumerated() {
+        for (_, player) in sortedPlayers.enumerated() {
             teamATotal = getTeamTotal(team: teamA);
             teamBTotal = getTeamTotal(team: teamB);
             

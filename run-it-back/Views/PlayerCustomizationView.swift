@@ -70,14 +70,14 @@ struct PlayerCustomizationView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Player Name")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.primary)
                     
                     TextField("Enter name", text: $name)
                         .textFieldStyle(.plain)
                         .padding()
-                        .background(Color.white.opacity(0.1))
+                        .background(Color(uiColor: .secondarySystemBackground))
                         .cornerRadius(8)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.primary)
                         .autocapitalization(.words)
                 }
             }
@@ -87,15 +87,15 @@ struct PlayerCustomizationView: View {
                 VStack(spacing: 8) {
                     Text("Overall Grade")
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.secondary)
                     
                     Text(gradeRating)
                         .font(.system(size: 48, weight: .bold))
-                        .foregroundColor(.cyan)
+                        .foregroundStyle(.tint)
                 }
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color.white.opacity(0.05))
+                .background(Color(uiColor: .tertiarySystemBackground))
                 .cornerRadius(12)
             }
             
@@ -103,7 +103,7 @@ struct PlayerCustomizationView: View {
             VStack(alignment: .leading, spacing: 16) {
                 Text("Player Stats")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 
                 StatSlider(label: "Offense", value: $offense)
                 StatSlider(label: "Defense", value: $defense)
@@ -116,13 +116,13 @@ struct PlayerCustomizationView: View {
             VStack(alignment: .leading, spacing: 12) {
                 Text("Height")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 
                 HStack(spacing: 20) {
                     VStack {
                         Text("Feet")
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundStyle(.secondary)
                         
                         Picker("Feet", selection: $heightFeet) {
                             ForEach(4...7, id: \.self) { feet in
@@ -136,7 +136,7 @@ struct PlayerCustomizationView: View {
                     VStack {
                         Text("Inches")
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundStyle(.secondary)
                         
                         Picker("Inches", selection: $heightInches) {
                             ForEach(0...11, id: \.self) { inches in
@@ -148,16 +148,16 @@ struct PlayerCustomizationView: View {
                     }
                 }
                 .padding()
-                .background(Color.white.opacity(0.05))
+                .background(Color(uiColor: .tertiarySystemBackground))
                 .cornerRadius(12)
                 
                 if heightBonus > 0 {
                     HStack {
                         Image(systemName: "arrow.up.circle.fill")
-                            .foregroundColor(.green)
+                            .foregroundStyle(.green)
                         Text("Height Bonus: +\(heightBonus)")
                             .font(.subheadline)
-                            .foregroundColor(.green)
+                            .foregroundStyle(.green)
                     }
                 }
             }
@@ -174,13 +174,13 @@ struct StatSlider: View {
             HStack {
                 Text(label)
                     .font(.subheadline)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.primary)
                 
                 Spacer()
                 
                 Text("\(value)")
                     .font(.headline)
-                    .foregroundColor(.cyan)
+                    .foregroundStyle(.tint)
                     .frame(width: 30)
             }
             
@@ -191,14 +191,14 @@ struct StatSlider: View {
             .tint(.cyan)
         }
         .padding()
-        .background(Color.white.opacity(0.05))
+        .background(Color(uiColor: .tertiarySystemBackground))
         .cornerRadius(8)
     }
 }
 
 #Preview {
     ZStack {
-        Color.black.ignoresSafeArea()
+        Color(uiColor: .systemBackground).ignoresSafeArea()
         
         ScrollView {
             PlayerCustomizationView(
@@ -215,3 +215,4 @@ struct StatSlider: View {
         }
     }
 }
+

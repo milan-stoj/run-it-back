@@ -7,100 +7,127 @@
 
 import SwiftUI
 
+struct LabeledField: View {
+    let title: String
+    let placeholder: String
+    @Binding var text: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(.primary)
+            TextField("", text: $text, prompt: Text(placeholder).foregroundStyle(.secondary))
+                .padding()
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .foregroundStyle(.primary)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+                )
+        }
+    }
+}
+
+struct LabeledDatePicker: View {
+    let title: String
+    @Binding var date: Date
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(.primary)
+            DatePicker(
+                selection: $date,
+                displayedComponents: [.date, .hourAndMinute]
+            ) {
+                EmptyView()
+            }
+            .datePickerStyle(.compact)
+            .tint(.accentColor)
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+            )
+        }
+    }
+}
+
+struct GameTypePicker: View {
+    @Binding var selected: GameType
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Game Type")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(.primary)
+
+            HStack(spacing: 12) {
+                ForEach(GameType.allCases, id: \.self) { type in
+                    GameTypeButton(type: type, isSelected: selected == type) {
+                        selected = type
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct GameTypeButton: View {
+    let type: GameType
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(type.rawValue)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(isSelected ? .white : .primary)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .background(isSelected ? Color.accentColor : Color(UIColor.secondarySystemBackground))
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+                )
+        }
+    }
+}
+
 struct CreateGameView: View {
     @Environment(\.dismiss) var dismiss
     @State private var gameState = GameState()
     @State private var navigationDestination: NavigationDestination?
     @State private var showAlert = false
     
-    enum NavigationDestination: Hashable {
+    enum NavigationDestination: String, Identifiable, Hashable {
         case addPlayers
+        var id: String { rawValue }
     }
     
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color(.systemBackground).ignoresSafeArea()
             
             ScrollView {
                 VStack(spacing: 24) {
                     // Court Name
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Court / Gym Name")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.white)
-                        
-                        TextField("e.g., Central Park Court", text: $gameState.courtName)
-                            .padding()
-                            .background(Color(white: 0.1))
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(white: 0.2), lineWidth: 1)
-                            )
-                    }
+                    LabeledField(title: "Court / Gym Name", placeholder: "e.g., Central Park Court", text: $gameState.courtName)
                     
                     // Location
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Location")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.white)
-                        
-                        TextField("e.g., Manhattan, NY", text: $gameState.location)
-                            .padding()
-                            .background(Color(white: 0.1))
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(white: 0.2), lineWidth: 1)
-                            )
-                    }
+                    LabeledField(title: "Location", placeholder: "e.g., Manhattan, NY", text: $gameState.location)
                     
                     // Date Picker
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Date & Time")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.white)
-                        
-                        DatePicker("", selection: $gameState.date)
-                            .datePickerStyle(.compact)
-                            .colorScheme(.dark)
-                            .padding()
-                            .background(Color(white: 0.1))
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(white: 0.2), lineWidth: 1)
-                            )
-                    }
+                    LabeledDatePicker(title: "Date & Time", date: $gameState.date)
                     
                     // Game Type
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Game Type")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.white)
-                        
-                        HStack(spacing: 12) {
-                            ForEach(GameType.allCases, id: \.self) { type in
-                                Button(action: {
-                                    gameState.gameType = type
-                                }) {
-                                    Text(type.rawValue)
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .foregroundColor(gameState.gameType == type ? .black : .white)
-                                        .frame(maxWidth: .infinity)
-                                        .padding(.vertical, 12)
-                                        .background(gameState.gameType == type ? Color.white : Color(white: 0.1))
-                                        .cornerRadius(8)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .stroke(Color(white: 0.2), lineWidth: 1)
-                                        )
-                                }
-                            }
-                        }
-                    }
+                    GameTypePicker(selected: $gameState.gameType)
                     
                     // Continue Button
                     Button(action: {
@@ -112,22 +139,23 @@ struct CreateGameView: View {
                     }) {
                         Text("Continue to Add Players")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.black)
+                            .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
-                            .background(Color.white)
+                            .background(Color.accentColor)
+                            .shadow(color: Color.accentColor.opacity(0.25), radius: 8, x: 0, y: 4)
                             .cornerRadius(8)
                     }
                     .padding(.top, 8)
                 }
                 .padding(24)
+                .tint(.accentColor)
             }
         }
         .navigationTitle("Create Game")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(Color.black, for: .navigationBar)
+        .toolbarBackground(Color(.systemBackground), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarColorScheme(.dark, for: .navigationBar)
         .navigationDestination(item: $navigationDestination) { destination in
             switch destination {
             case .addPlayers:

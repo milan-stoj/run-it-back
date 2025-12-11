@@ -15,7 +15,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.black.ignoresSafeArea()
+                Color(uiColor: .systemBackground).ignoresSafeArea()
                 
                 VStack(spacing: 0) {
                     Spacer()
@@ -25,6 +25,7 @@ struct HomeView: View {
                         // Header with border
                         VStack(spacing: 8) {
                             Image("Logo")
+                                .renderingMode(.original)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(maxWidth: .infinity)
@@ -36,7 +37,7 @@ struct HomeView: View {
                         .overlay(
                             Rectangle()
                                 .frame(height: 1)
-                                .foregroundColor(Color(white: 0.2)),
+                                .foregroundStyle(Color.secondary.opacity(0.3)),
                             alignment: .bottom
                         )
                         
@@ -48,10 +49,10 @@ struct HomeView: View {
                         NavigationLink(destination: CreateGameView()) {
                             Text("Create a New Game")
                                 .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.black)
+                                .foregroundStyle(.primary)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)
-                                .background(Color.white)
+                                .background(Color(uiColor: .secondarySystemBackground))
                                 .cornerRadius(8)
                         }
                         .padding(.horizontal, 24)
@@ -68,14 +69,14 @@ struct HomeView: View {
                                 Text("Player Library")
                             }
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundStyle(.primary)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
-                            .background(Color(white: 0.1))
+                            .background(Color(uiColor: .secondarySystemBackground))
                             .cornerRadius(8)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(white: 0.2), lineWidth: 1)
+                                    .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
                             )
                         }
                         .padding(.horizontal, 24)
@@ -88,24 +89,24 @@ struct HomeView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("How it works")
                             .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundStyle(.primary)
                         
                         VStack(alignment: .leading, spacing: 12) {
                             Text("1. Create a game session with court details")
                                 .font(.system(size: 14))
-                                .foregroundColor(Color(white: 0.8))
+                                .foregroundStyle(.secondary)
                             
                             Text("2. Add players and rate their skills (1-5)")
                                 .font(.system(size: 14))
-                                .foregroundColor(Color(white: 0.8))
+                                .foregroundStyle(.secondary)
                             
                             Text("3. Auto-balance teams fairly")
                                 .font(.system(size: 14))
-                                .foregroundColor(Color(white: 0.8))
+                                .foregroundStyle(.secondary)
                             
                             Text("4. Check out your balanced teams")
                                 .font(.system(size: 14))
-                                .foregroundColor(Color(white: 0.8))
+                                .foregroundStyle(.secondary)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -118,13 +119,13 @@ struct HomeView: View {
                     VStack(spacing: 4) {
                         Text("© 2025 NextAllis Tech")
                             .font(.system(size: 12))
-                            .foregroundColor(Color(white: 0.5))
+                            .foregroundStyle(.secondary)
                         
                         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
                            let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
                             Text("Version \(version) (Build \(build))")
                                 .font(.system(size: 10))
-                                .foregroundColor(Color(white: 0.4))
+                                .foregroundStyle(.secondary)
                         }
                     }
                     .frame(maxWidth: .infinity)
