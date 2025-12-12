@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F1B9BCDD2EEC8E080071366F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F1B9BCDC2EEC8E080071366F /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		F1B3F0F62EEB5C4400AFBECC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -19,6 +23,7 @@
 /* Begin PBXFileReference section */
 		F1B3170F2EE8D07A00B11C11 /* CourtFoundry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CourtFoundry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1B3F0F22EEB5C4400AFBECC /* CourtFoundryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CourtFoundryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1B9BCDC2EEC8E080071366F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -58,6 +63,7 @@
 				F1B317112EE8D07A00B11C11 /* CourtFoundry */,
 				F1B3F0F32EEB5C4400AFBECC /* CourtFoundryTests */,
 				F1B317102EE8D07A00B11C11 /* Products */,
+				F1B9BCDC2EEC8E080071366F /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +168,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1B9BCDD2EEC8E080071366F /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
